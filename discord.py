@@ -1,20 +1,23 @@
 import discord
-from discord.ext import commands
-bot = commands.Bot(command_prefix='!')
-TOKEN = 'ODE5MTE1MDI2NDU0NTQ0NDE1.YEh6UA.rQJcY4WXa68VDbHMOyPz5G4drr4'
+improt os
 
-@bot.event
+
+client = discord.client()
+
+
+@client.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game('강의'))
-    print('[알림][봇이 성공적으로 구동되었습니다.]')
+    print("login")
+    print(client.user.name)
+    print(client.user.id)
+    print("------------------")
+    await client.change_presence(game=discord.Game(name='프로그래밍', type=1))
 
-@bot.event
-async def on_message(msg):
-    if msg.author.bot: return None
-    await bot.process_commands(msg)
+@client.event
+async def on_message(message):
+    if message.content.startswith("안녕"):
+        await client.send_message(message.channel, "안녕")
 
-@bot.command()
-async def 안녕(ctx):
-    await ctx.channel.send('나도 안녕!')
 
-bot.run(ODE5MTE1MDI2NDU0NTQ0NDE1.YEh6UA.rQJcY4WXa68VDbHMOyPz5G4drr4)
+        acces_token = os.environ["BOT_TOKEN"]
+        client.run(acces_token)
